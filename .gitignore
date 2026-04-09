@@ -1,0 +1,10 @@
+__pycache__/
+*.pyc
+
+dataset/dataset/
+models/*.pt
+outputs/*
+!outputs/.gitkeep
+!models/.gitkeep
+
+dataset/*.zip
