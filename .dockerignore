@@ -1,0 +1,12 @@
+.git
+.gitignore
+.venv
+__pycache__
+*.pyc
+.DS_Store
+
+dataset
+.runs
+outputs
+models/*.pt
+train.py

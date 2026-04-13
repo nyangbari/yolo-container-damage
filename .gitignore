@@ -2,9 +2,9 @@ __pycache__/
 *.pyc
 
 dataset/dataset/
+.runs/
 models/*.pt
-outputs/*
-!outputs/.gitkeep
 !models/.gitkeep
+outputs/
 
 dataset/*.zip

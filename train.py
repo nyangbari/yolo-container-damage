@@ -19,7 +19,7 @@ DATA_ROOT = ROOT / "dataset"
 DATASET_DIR = DATA_ROOT / "dataset"
 ZIP_PATH = DATA_ROOT / "Container Damage Detection.yolo26.zip"
 MODEL_DIR = ROOT / "models"
-OUTPUT_DIR = ROOT / "outputs"
+RUNS_DIR = ROOT / ".runs"
 DEFAULT_MODEL_NAME = "yolo26s.pt"
 IMAGE_SUFFIXES = {".jpg", ".jpeg", ".png", ".bmp", ".tif", ".tiff", ".webp"}
 
@@ -58,7 +58,7 @@ def default_device() -> str | int:
 def ensure_dirs() -> None:
     DATA_ROOT.mkdir(parents=True, exist_ok=True)
     MODEL_DIR.mkdir(parents=True, exist_ok=True)
-    OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
+    RUNS_DIR.mkdir(parents=True, exist_ok=True)
 
 
 def extract_dataset_if_needed() -> None:
@@ -203,11 +203,11 @@ def load_model(model_name: str) -> "YOLO":
 
 
 def copy_best_weight() -> Path:
-    best_weight = OUTPUT_DIR / "train" / "weights" / "best.pt"
+    best_weight = RUNS_DIR / "train" / "weights" / "best.pt"
     if not best_weight.exists():
         raise FileNotFoundError(f"Training completed but best.pt was not found at {best_weight}")
 
-    copied_best = OUTPUT_DIR / "best.pt"
+    copied_best = MODEL_DIR / "best.pt"
     shutil.copy2(best_weight, copied_best)
     return copied_best
 
@@ -231,7 +231,7 @@ def main() -> None:
         batch=args.batch,
         workers=args.workers,
         device=device,
-        project=str(OUTPUT_DIR),
+        project=str(RUNS_DIR),
         name="train",
         exist_ok=True,
         seed=args.seed,

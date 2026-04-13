@@ -1,0 +1,13 @@
+services:
+  damage-api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: damage-api
+    ports:
+      - "8787:8787"
+    environment:
+      YOLO_MODEL_PATH: /app/models/best.pt
+    volumes:
+      - ./models:/app/models
+    restart: unless-stopped
